@@ -1,0 +1,17 @@
+# Python environment
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Local Database (We want the code, not the data)
+data/*.db
+data/*.sqlite
+
+# Sensitive info
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
