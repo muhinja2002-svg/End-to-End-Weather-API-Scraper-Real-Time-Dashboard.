@@ -3,15 +3,17 @@
 ## The "So What?" (Business Value)
 Supply chain and logistics teams lose millions annually due to unpredicted extreme weather events. This platform ingests real-time telemetry from external meteorological APIs, validates the data to prevent silent downstream reporting failures, and visualizes it in an auto-updating dashboard. This allows operational teams to reroute shipments proactively based on live weather fronts.
 
-## Architecture Diagram
-[External Weather API] / [Mock Generator] 
-       ↓ (JSON)
-[Python ETL Pipeline (src/etl_pipeline.py)]
-       ↓ (Data Contract Validation via Pydantic)
-       ↓ (Idempotent UPSERT)
-[Structured SQLite Database (db/weather.db)]
-       ↓ (SQL Queries)
-[Streamlit Web Dashboard (app/dashboard.py)]
+graph TD
+    A[External Weather API] -- "JSON" --> B[Mock Generator]
+    B -- "Raw Data" --> C[Python ETL Pipeline]
+    C --> D{Pydantic Validation}
+    D -- "Success" --> E[SQLite Database]
+    D -- "Fail" --> F[Error Logging]
+    E -- "SQL Query" --> G[Streamlit Dashboard]
+    
+    style D fill:#f9f,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px
+    style G fill:#bfb,stroke:#333,stroke-width:2px
 
 ## Setup Instructions
 1. **Clone & Virtual Env**: `python -m venv venv && source venv/bin/activate`
