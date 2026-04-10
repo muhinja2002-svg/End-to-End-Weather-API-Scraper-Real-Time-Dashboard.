@@ -59,7 +59,7 @@ def load_to_supabase(data: list[dict]):
         try:
             # FIX 3: Detailed validation logging
             record = WeatherMetric(**item)
-            validated_records.append(record.dict(by_alias=True))
+            validated_records.append(record.model_dump(mode='json'))
         except ValidationError as e:
             logger.warning(f"Skipped invalid record for '{item.get('city', 'unknown')}': {e}")
 
