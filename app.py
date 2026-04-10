@@ -9,13 +9,15 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. API CONFIGURATION
+# 2. API CONFIGURATION (Securely pulling from Streamlit Secrets)
 SUPABASE_URL = "https://ahnotyrkehippbomgvop.supabase.co"
-# Using your verified public key
-SUPABASE_KEY = "sb_publishable_3bOU_ULwZFEHKac3zkHsPg_Fw2WhCRM"
+try:
+    SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
+except KeyError:
+    st.error("Missing SUPABASE_KEY. Please add it to your .streamlit/secrets.toml or Streamlit Cloud settings.")
+    st.stop()
 
-# 3. COORDINATE LOOKUP (For the Map)
-# This maps your city names to their actual GPS coordinates
+# 3. COORDINATE LOOKUP
 coords = {
     "Nairobi": {"lat": -1.286389, "lon": 36.817223},
     "London": {"lat": 51.5074, "lon": -0.1278},
@@ -25,7 +27,7 @@ coords = {
 }
 
 # 4. DATA FETCHING FUNCTION
-@st.cache_data(ttl=3600)  # Refresh cache every hour to match your new sync
+@st.cache_data(ttl=3600)  # Refresh cache every hour
 def load_data():
     headers = {
         "apikey": SUPABASE_KEY,
@@ -43,7 +45,7 @@ def load_data():
 # --- DASHBOARD UI ---
 
 st.title("🌍 Real-Time Weather Data Analytics")
-st.markdown(f"**Status:** Live Connection to Supabase Cloud | **Sync Frequency:** Hourly")
+st.markdown(f"**Status:** Live Connection to Supabase Cloud | **Security:** Active (Streamlit Secrets)")
 st.divider()
 
 df = load_data()
@@ -59,6 +61,7 @@ if not df.empty:
     # ROW 1: Key Metrics
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Records", len(df))
+    # We round to 1 decimal place for clean business reporting
     col2.metric("Avg Global Temp", f"{round(df['temperature_c'].mean(), 1)}°C")
     col3.metric("Avg Humidity", f"{round(df['humidity_pct'].mean(), 1)}%")
     col4.metric("Cities Tracked", df['city'].nunique())
@@ -74,7 +77,7 @@ if not df.empty:
 
     with left_col:
         st.subheader("Temperature Trends")
-        # Pivot data for the line chart
+        # Creating a pivot for a clean time-series line chart
         chart_data = df.pivot_table(index='timestamp', columns='city', values='temperature_c')
         st.line_chart(chart_data)
 

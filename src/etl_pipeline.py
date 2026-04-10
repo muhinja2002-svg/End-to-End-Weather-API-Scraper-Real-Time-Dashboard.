@@ -1,82 +1,73 @@
 import os
-import json
-import logging
 import requests
-from datetime import datetime
-from typing import List, Optional
-from pydantic import BaseModel, ValidationError
+import logging
+from datetime import datetime, timezone
+from pydantic import BaseModel, Field, ValidationError
 
-# 1. SETUP & LOGGING
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# --- CONFIG ---
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# 2. CONFIGURATION
+CITIES = ["Nairobi", "London", "Sydney", "Tokyo", "New York"]
 SUPABASE_URL = "https://ahnotyrkehippbomgvop.supabase.co"
-TABLE_NAME = "weather_metrics"
-RAW_DATA_PATH = "data/raw_mock_api.json"
+# These must be set in GitHub Secrets
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+OWM_API_KEY = os.environ.get("OWM_API_KEY")
 
-# --- SMART KEY MANAGEMENT ---
-# This looks for the "SUPABASE_KEY" secret in GitHub Actions.
-# If it doesn't find it, it falls back to your manual key for local testing.
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "sb_publishable_3bOU_ULwZFEHKac3zkHsPg_Fw2WhCRM")
-
-# 3. DATA SCHEMA
-class WeatherData(BaseModel):
+class WeatherMetric(BaseModel):
     city: str
-    temperature_c: Optional[float] = 0.0
-    humidity_pct: Optional[int] = 0
-    timestamp: datetime
+    temperature_c: float
+    humidity_pct: int = Field(ge=0, le=100)
     status: str
+    timestamp: datetime
 
-# 4. ETL FUNCTIONS
-def extract_data() -> List[dict]:
-    """Reads raw JSON data from the local file."""
-    try:
-        with open(RAW_DATA_PATH, 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        logger.error(f"Source file not found at {RAW_DATA_PATH}")
-        return []
-
-def process_and_load_via_api(raw_data: List[dict]):
-    """Validates and pushes data using HTTPS API."""
-    valid_records = []
-    
-    for item in raw_data:
+def extract_from_api() -> list[dict]:
+    records = []
+    for city in CITIES:
         try:
-            record = WeatherData(**item)
-            data_dict = record.model_dump()
-            # Convert timestamp to ISO format string for the API
-            data_dict['timestamp'] = data_dict['timestamp'].isoformat()
-            valid_records.append(data_dict)
-        except ValidationError:
-            continue
-
-    if valid_records:
-        # Standard HTTPS headers for Supabase PostgREST
-        headers = {
-            "apikey": SUPABASE_KEY,
-            "Authorization": f"Bearer {SUPABASE_KEY}",
-            "Content-Type": "application/json",
-            "Prefer": "return=minimal"
-        }
-        url = f"{SUPABASE_URL}/rest/v1/{TABLE_NAME}"
-        
-        try:
-            response = requests.post(url, headers=headers, json=valid_records)
-            
-            if response.status_code in [200, 201]:
-                logger.info(f"🚀 SUCCESS: Uploaded {len(valid_records)} rows to Supabase Cloud!")
-            else:
-                logger.error(f"❌ API ERROR: {response.status_code} - {response.text}")
+            url = "https://api.openweathermap.org/data/2.5/weather"
+            resp = requests.get(url, params={
+                "q": city,
+                "appid": OWM_API_KEY,
+                "units": "metric"
+            }, timeout=10)
+            resp.raise_for_status()
+            data = resp.json()
+            records.append({
+                "city": city,
+                "temperature_c": data["main"]["temp"],
+                "humidity_pct": data["main"]["humidity"],
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "status": data["weather"][0]["main"]
+            })
+            logger.info(f"Extracted: {city}")
         except Exception as e:
-            logger.critical(f"❌ CONNECTION ERROR: {str(e)}")
-    else:
-        logger.error("No valid records found to process.")
+            logger.error(f"Failed to fetch {city}: {e}")
+    return records
 
-# 5. EXECUTION
+def load_to_supabase(data: list[dict]):
+    headers = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": f"Bearer {SUPABASE_KEY}",
+        "Content-Type": "application/json",
+        "Prefer": "resolution=merge-duplicates" # FIX 2: Upsert logic
+    }
+    url = f"{SUPABASE_URL}/rest/v1/weather_metrics"
+    
+    validated_records = []
+    for item in data:
+        try:
+            # FIX 3: Detailed validation logging
+            record = WeatherMetric(**item)
+            validated_records.append(record.dict(by_alias=True))
+        except ValidationError as e:
+            logger.warning(f"Skipped invalid record for '{item.get('city', 'unknown')}': {e}")
+
+    if validated_records:
+        resp = requests.post(url, headers=headers, json=validated_records)
+        resp.raise_for_status()
+        logger.info(f"Successfully synced {len(validated_records)} records.")
+
 if __name__ == "__main__":
-    logger.info("Starting Automated ETL Pipeline...")
-    data = extract_data()
-    if data:
-        process_and_load_via_api(data)
+    raw_data = extract_from_api()
+    load_to_supabase(raw_data)
