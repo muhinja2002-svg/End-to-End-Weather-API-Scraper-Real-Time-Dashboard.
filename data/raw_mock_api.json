@@ -1,0 +1,352 @@
+[
+    {
+        "city": "London",
+        "temperature_c": 20.25,
+        "humidity_pct": 79,
+        "timestamp": "2026-04-10T10:35:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "New York",
+        "temperature_c": 13.82,
+        "humidity_pct": 67,
+        "timestamp": "2026-04-10T10:20:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 20.79,
+        "humidity_pct": 84,
+        "timestamp": "2026-04-10T10:05:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "London",
+        "temperature_c": 0.65,
+        "humidity_pct": 72,
+        "timestamp": "2026-04-10T09:50:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 37.94,
+        "humidity_pct": 88,
+        "timestamp": "2026-04-10T09:35:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": -5.18,
+        "humidity_pct": 44,
+        "timestamp": "2026-04-10T09:20:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Tokyo",
+        "temperature_c": 0.0,
+        "humidity_pct": 37,
+        "timestamp": "2026-04-10T09:05:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "New York",
+        "temperature_c": 11.15,
+        "humidity_pct": 87,
+        "timestamp": "2026-04-10T08:50:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 5.52,
+        "humidity_pct": 62,
+        "timestamp": "2026-04-10T08:35:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "New York",
+        "temperature_c": 7.04,
+        "humidity_pct": 36,
+        "timestamp": "2026-04-10T08:20:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Tokyo",
+        "temperature_c": 10.6,
+        "humidity_pct": 78,
+        "timestamp": "2026-04-10T08:05:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": 1.2,
+        "humidity_pct": 87,
+        "timestamp": "2026-04-10T07:50:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "New York",
+        "temperature_c": 3.27,
+        "humidity_pct": 33,
+        "timestamp": "2026-04-10T07:35:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "London",
+        "temperature_c": -7.43,
+        "humidity_pct": 61,
+        "timestamp": "2026-04-10T07:20:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "New York",
+        "temperature_c": 33.5,
+        "humidity_pct": 42,
+        "timestamp": "2026-04-10T07:05:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": -8.12,
+        "humidity_pct": 42,
+        "timestamp": "2026-04-10T06:50:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "New York",
+        "temperature_c": 15.57,
+        "humidity_pct": 88,
+        "timestamp": "2026-04-10T06:35:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 31.4,
+        "humidity_pct": 92,
+        "timestamp": "2026-04-10T06:20:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "New York",
+        "temperature_c": -7.93,
+        "humidity_pct": 35,
+        "timestamp": "2026-04-10T06:05:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "London",
+        "temperature_c": 15.12,
+        "humidity_pct": 59,
+        "timestamp": "2026-04-10T05:50:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "London",
+        "temperature_c": -5.01,
+        "humidity_pct": 51,
+        "timestamp": "2026-04-10T05:35:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": 18.81,
+        "humidity_pct": 41,
+        "timestamp": "2026-04-10T05:20:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": 35.79,
+        "humidity_pct": 61,
+        "timestamp": "2026-04-10T05:05:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 1.91,
+        "humidity_pct": 94,
+        "timestamp": "2026-04-10T04:50:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "London",
+        "temperature_c": 38.59,
+        "humidity_pct": 40,
+        "timestamp": "2026-04-10T04:35:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": -2.66,
+        "humidity_pct": 48,
+        "timestamp": "2026-04-10T04:20:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 38.4,
+        "humidity_pct": 37,
+        "timestamp": "2026-04-10T04:05:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "New York",
+        "temperature_c": -9.84,
+        "humidity_pct": 51,
+        "timestamp": "2026-04-10T03:50:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "London",
+        "temperature_c": 12.28,
+        "humidity_pct": 35,
+        "timestamp": "2026-04-10T03:35:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "London",
+        "temperature_c": 39.01,
+        "humidity_pct": 80,
+        "timestamp": "2026-04-10T03:20:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "Tokyo",
+        "temperature_c": 20.34,
+        "humidity_pct": 83,
+        "timestamp": "2026-04-10T03:05:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "New York",
+        "temperature_c": -5.17,
+        "humidity_pct": 88,
+        "timestamp": "2026-04-10T02:50:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": 29.92,
+        "humidity_pct": 36,
+        "timestamp": "2026-04-10T02:35:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "London",
+        "temperature_c": 31.68,
+        "humidity_pct": 72,
+        "timestamp": "2026-04-10T02:20:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 21.57,
+        "humidity_pct": 64,
+        "timestamp": "2026-04-10T02:05:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "London",
+        "temperature_c": 15.52,
+        "humidity_pct": 82,
+        "timestamp": "2026-04-10T01:50:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 30.84,
+        "humidity_pct": 48,
+        "timestamp": "2026-04-10T01:35:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 32.55,
+        "humidity_pct": 40,
+        "timestamp": "2026-04-10T01:20:18.481244",
+        "status": "Clear"
+    },
+    {
+        "city": "London",
+        "temperature_c": -3.23,
+        "humidity_pct": 89,
+        "timestamp": "2026-04-10T01:05:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "Nairobi",
+        "temperature_c": 23.04,
+        "humidity_pct": 81,
+        "timestamp": "2026-04-10T00:50:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": 33.16,
+        "humidity_pct": 43,
+        "timestamp": "2026-04-10T00:35:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "London",
+        "temperature_c": 0.0,
+        "humidity_pct": 54,
+        "timestamp": "2026-04-10T00:20:18.481244",
+        "status": "Cloudy"
+    },
+    {
+        "city": "London",
+        "temperature_c": 13.52,
+        "humidity_pct": 57,
+        "timestamp": "2026-04-10T00:05:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": 6.7,
+        "humidity_pct": 61,
+        "timestamp": "2026-04-09T23:50:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": 11.5,
+        "humidity_pct": 30,
+        "timestamp": "2026-04-09T23:35:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": -4.2,
+        "humidity_pct": 35,
+        "timestamp": "2026-04-09T23:20:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": 12.91,
+        "humidity_pct": 93,
+        "timestamp": "2026-04-09T23:05:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "London",
+        "temperature_c": 22.08,
+        "humidity_pct": 57,
+        "timestamp": "2026-04-09T22:50:18.481244",
+        "status": "Storm"
+    },
+    {
+        "city": "New York",
+        "temperature_c": -8.95,
+        "humidity_pct": 42,
+        "timestamp": "2026-04-09T22:35:18.481244",
+        "status": "Rain"
+    },
+    {
+        "city": "Sydney",
+        "temperature_c": -4.9,
+        "humidity_pct": 60,
+        "timestamp": "2026-04-09T22:20:18.481244",
+        "status": "Storm"
+    }
+]
